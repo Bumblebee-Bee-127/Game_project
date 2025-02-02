@@ -12,11 +12,13 @@ size = width, height = (1800, 990)
 print(width, height)
 scr = pygame.display.set_mode(size)
 pygame.display.set_caption('Меню')
+f = pygame.image.load('pictures/Fon/Fon-6.png')
+image = pygame.transform.scale(f, (size))
 #scr.fill((230, 0, 0))
 button_text = {1: 'Уровень 1', 2: 'Уровень 2', 3: 'Уровень 3',
                4: 'Уровень 4', 5: 'Уровень 5', 6: 'Уровень 6'}
 def button(x, y, w, h, text): #action=None):
-    font = pygame.font.Font(None, 40)
+    font = pygame.font.Font(None, 60)
     text_but = font.render(text, True, (0, 0, 0))
     text_rect = text_but.get_rect(
         center=(x + (w // 2),
@@ -41,6 +43,7 @@ def button(x, y, w, h, text): #action=None):
 
 while True:
     clock.tick(60)
+    scr.blit(image, (0, 0))
 
 
     for event in pygame.event.get():
