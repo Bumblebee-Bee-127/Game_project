@@ -13,6 +13,7 @@ print(width, height)
 scr = pygame.display.set_mode(size)
 pygame.display.set_caption('Меню')
 f = pygame.image.load('pictures/Fon/Fon-6.png')
+
 image = pygame.transform.scale(f, (size))
 #scr.fill((230, 0, 0))
 button_text = {1: 'Уровень 1', 2: 'Уровень 2', 3: 'Уровень 3',
