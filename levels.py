@@ -2,23 +2,13 @@ import pygame
 
 import sys
 
-
+from dicts import button_text
 pygame.init()
-
 clock = pygame.time.Clock()
 
-
 size = width, height = (1800, 990)
-print(width, height)
-scr = pygame.display.set_mode(size)
-pygame.display.set_caption('Меню')
-f = pygame.image.load('pictures/Fon/Fon-6.png')
 
-image = pygame.transform.scale(f, (size))
-#scr.fill((230, 0, 0))
-button_text = {1: 'Уровень 1', 2: 'Уровень 2', 3: 'Уровень 3',
-               4: 'Уровень 4', 5: 'Уровень 5', 6: 'Уровень 6'}
-def button(x, y, w, h, text): #action=None):
+def button(scr, x, y, w, h, text): #action=None):
     font = pygame.font.Font(None, 60)
     text_but = font.render(text, True, (0, 0, 0))
     text_rect = text_but.get_rect(
@@ -41,43 +31,33 @@ def button(x, y, w, h, text): #action=None):
         scr.blit(text_but, text_rect)
 
 
+def level(size):
 
-while True:
-    clock.tick(60)
-    scr.blit(image, (0, 0))
+    scr = pygame.display.set_mode(size)
+    pygame.display.set_caption('Меню')
+    f = pygame.image.load('pictures/Fon/Fon-6.png')
+    image = pygame.transform.scale(f, (size))
+    while True:
+        clock.tick(60)
+        scr.blit(image, (0, 0))
 
+        for event in pygame.event.get():
 
-    for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            y = 200
+            for i in range(1, 4):
+                button(scr, 100, y, 750, 150, button_text[i])
+                y += 200
+            y = 200
+            for j in range(4, 7):
+                button(scr, 950, y, 750, 150, button_text[j])
+                y += 200
 
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        y = 200
-        for i in range(1, 4):
-            button(100, y, 750, 150, button_text[i])
-            y += 200
-        y = 200
-        for j in range(4, 7):
-            button(950, y, 750, 150, button_text[j])
-            y += 200
-
-
-
-        ###
-
-        # Показать текст кнопки
-
-
-        pygame.display.update()
-
-
-
-
+            pygame.display.update()
 
 if __name__ == '__main__':
-    #button_play(width//2, height//2)
-    level(100, 100, 650, 140, 6)
+    level(size)
 
-    #button_play(10, 10)
-    #button(width//2 - 150, height//2 + 100, 250, 50, 'Game', 'play', scr)
-    #button(width // 2 - 50, height // 2 + 10, 250, 50, 'Game', 'play', scr)
+
