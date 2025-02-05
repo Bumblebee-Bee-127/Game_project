@@ -13,8 +13,14 @@ print(width, height)
 scr = pygame.display.set_mode(size)
 pygame.display.set_caption('Меню')
 #scr.fill((230, 0, 0))
-def menu(x_exit, y_exit, x_play, y_play, x_level, y_level):
-    #size = width, height = (300, 200)
+def menu(scr, width, height):
+    x_exit = width - 190
+    y_exit = 20
+    x_play = width//2 - 350
+    y_play = height//2 - 100
+    x_level = width//2 - 280
+    y_level = height//2 + 150
+
     next_wind = 'menu'
     f = pygame.image.load('pictures/Fon/Fon-1.jpg')
     window = pygame.display.set_mode(size)
@@ -73,11 +79,11 @@ def menu(x_exit, y_exit, x_play, y_play, x_level, y_level):
                 ###
                 if button_rect_play.collidepoint(event.pos):
                     print('hj')
-                    next_wind = 'game'
+                    return 'game'
                 ###
                 if button_rect_level.collidepoint(event.pos):
                     print('hj3')
-                    next_wind = 'level'
+                    return 'level'
 
 
         if button_rect_exit.collidepoint(pygame.mouse.get_pos()):
@@ -94,6 +100,7 @@ def menu(x_exit, y_exit, x_play, y_play, x_level, y_level):
         if button_rect_play.collidepoint(pygame.mouse.get_pos()):
             pygame.draw.rect(button_surface_play, (189, 224, 255), (1, 1, 650, 140))
             pygame.draw.rect(button_surface_play, (0, 0, 0), (0, 0, 650, 140), 2)
+
         else:
             pygame.draw.rect(button_surface_play, (0, 0, 0), (1, 0, 449, 100))
             pygame.draw.rect(button_surface_play, (186, 134, 112), (1, 1, 650, 140))
@@ -104,6 +111,7 @@ def menu(x_exit, y_exit, x_play, y_play, x_level, y_level):
         ###
         if button_rect_level.collidepoint(pygame.mouse.get_pos()):
             pygame.draw.rect(button_surface_level, (189, 224, 255), (1, 1, 550, 100))
+
         else:
             pygame.draw.rect(button_surface_level, (0, 0, 0), (0, 0, 550, 100))
             pygame.draw.rect(button_surface_level, (186, 134, 112), (1, 1, 550, 100))
@@ -124,14 +132,14 @@ def menu(x_exit, y_exit, x_play, y_play, x_level, y_level):
         pygame.display.update()
         scr.blit(window, (1, 1))
 
-    print(next_wind)
+
 
 
 
 
 if __name__ == '__main__':
     #button_play(width//2, height//2)
-    menu(width - 190, 20, width//2 - 350, height//2 - 100, width//2 - 280, height//2 + 150)
+    menu(scr, width - 190, 20, width//2 - 350, height//2 - 100, width//2 - 280, height//2 + 150)
 
     #button_play(10, 10)
     #button(width//2 - 150, height//2 + 100, 250, 50, 'Game', 'play', scr)

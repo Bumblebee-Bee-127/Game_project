@@ -2,14 +2,15 @@ import pygame
 
 import sys
 
+from actions import *
 from dicts import button_text
 pygame.init()
 clock = pygame.time.Clock()
 
 size = width, height = (1800, 990)
-
-def button(scr, x, y, w, h, text): #action=None):
-    font = pygame.font.Font(None, 60)
+scr = pygame.display.set_mode(size)
+def button(scr, x, y, w, h, text, text_size = 60, action = None): #action=None):
+    font = pygame.font.Font(None, text_size)
     text_but = font.render(text, True, (0, 0, 0))
     text_rect = text_but.get_rect(
         center=(x + (w // 2),
@@ -20,9 +21,9 @@ def button(scr, x, y, w, h, text): #action=None):
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
         pygame.draw.rect(scr, (189, 224, 255), (x , y, w, h))
         scr.blit(text_but, text_rect)
-        if click[0] == 1: #and action is not None:
+        if click[0] == 1 and action is not None:
             print(text)
-            #action()
+            return 'menu'
 
     else:
         pygame.draw.rect(scr, (186, 134, 112), (x, y, w, h))
@@ -31,9 +32,7 @@ def button(scr, x, y, w, h, text): #action=None):
         scr.blit(text_but, text_rect)
 
 
-def level(size):
-
-    scr = pygame.display.set_mode(size)
+def level(scr, size):
     pygame.display.set_caption('Меню')
     f = pygame.image.load('pictures/Fon/Fon-6.png')
     image = pygame.transform.scale(f, (size))
@@ -46,6 +45,7 @@ def level(size):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            button(scr, 10, 10, 150, 50, 'Назад', 30, return_to_menu())
             y = 200
             for i in range(1, 4):
                 button(scr, 100, y, 750, 150, button_text[i])
@@ -58,6 +58,6 @@ def level(size):
             pygame.display.update()
 
 if __name__ == '__main__':
-    level(size)
+    level(scr, size)
 
 
